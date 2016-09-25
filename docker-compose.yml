@@ -1,0 +1,24 @@
+version: "2"
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:2.4
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  logstash:
+    container_name: logstash
+    image: logstash:2.4
+    ports:
+      - "5000:5000"
+    links:
+      - elasticsearch
+
+  kibana:
+    container_name: kibana
+    image: kibana:4.6
+    ports:
+      - "5601:5601"
+    links:
+      - elasticsearch
